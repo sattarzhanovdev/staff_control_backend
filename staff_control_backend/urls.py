@@ -20,4 +20,4 @@ urlpatterns = [
     path('api/', include(router.urls)),
     path('api/me/', МойПрофильAPIView.as_view()),
 
-]
+]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
