@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User
+from datetime import datetime, timedelta
 from django.utils import timezone
 
 class Работник(models.Model):
@@ -25,10 +26,26 @@ class Посещаемость(models.Model):
     работник = models.ForeignKey(Работник, on_delete=models.CASCADE)
     дата = models.DateField(default=timezone.now)
     время_прихода = models.TimeField(null=True, blank=True)
+    время_ухода = models.TimeField(null=True, blank=True)
     опоздание_в_минутах = models.PositiveIntegerField(default=0)
 
     def __str__(self):
         return f"{self.работник.имя} {self.работник.фамилия} - {self.дата}"
+    
+    def save(self, *args, **kwargs):
+        created = self.pk is None
+        super().save(*args, **kwargs)
+
+        if self.время_прихода and self.время_ухода:
+            # считаем отработанные минуты
+            start = datetime.combine(self.дата, self.время_прихода)
+            end = datetime.combine(self.дата, self.время_ухода)
+            duration = (end - start).total_seconds() / 3600  # в часах
+
+            # обновляем отработанные часы
+            работник = self.работник
+            работник.отработанные_часы += round(duration, 2)
+            работник.save()
 
 class Бонус(models.Model):
     работник = models.ForeignKey(Работник, on_delete=models.CASCADE)
