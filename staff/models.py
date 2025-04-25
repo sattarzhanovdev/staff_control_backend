@@ -21,6 +21,11 @@ class Работник(models.Model):
 
     def __str__(self):
         return f"{self.имя} {self.фамилия}"
+    
+    def delete(self, *args, **kwargs):
+        user = self.пользователь
+        super().delete(*args, **kwargs)
+        user.delete()
 
 class Посещаемость(models.Model):
     работник = models.ForeignKey(Работник, on_delete=models.CASCADE)
