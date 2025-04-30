@@ -13,6 +13,7 @@ class Работник(models.Model):
     телефон = models.CharField(max_length=20)
     жизни = models.IntegerField(default=5)
     бонусы = models.IntegerField(default=0)
+    тип_получения_зарплаты = models.CharField(max_length=500, default="Фиксированное")
     выполненные_задачи = models.IntegerField(default=0)
     просроченные_задачи = models.IntegerField(default=0)
     отработанные_часы = models.FloatField(default=0.0)
