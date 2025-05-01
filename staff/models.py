@@ -11,6 +11,8 @@ class Работник(models.Model):
     год_рождения = models.IntegerField()
     график_работы = models.CharField(max_length=255)
     телефон = models.CharField(max_length=20)
+    смена = models.CharField(max_length=100)
+    рабочие_дни = models.CharField(max_length=100)
     жизни = models.IntegerField(default=5)
     бонусы = models.IntegerField(default=0)
     тип_получения_зарплаты = models.CharField(max_length=500, default="Фиксированное")
