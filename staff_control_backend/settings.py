@@ -63,8 +63,7 @@ CORS_ALLOWED_ORIGINS = [
     "http://10.20.30.196:3000",
     "http://localhost:3000",  # твой frontend
     "http://127.0.0.1:3000", 
-    "https://staff-control-market.netlify.app",
-    "http://127.0.0.1:5500/" 
+    "https://staff-control-market.netlify.app"
 ]
 
 CORS_ALLOW_HEADERS = [
