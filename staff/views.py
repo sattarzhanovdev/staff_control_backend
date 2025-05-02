@@ -4,14 +4,15 @@ from rest_framework.response import Response
 from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 
-from .models import Работник, Посещаемость, Бонус, Задача
+from .models import Работник, Посещаемость, Бонус, Задача, Расходы
 from .serializers import (
     РаботникSerializer,
     ПосещаемостьSerializer,
     БонусSerializer,
     ЗадачаSerializer,
     РегистрацияРаботникаSerializer,
-    ОбновлениеЗадачиSerializer
+    ОбновлениеЗадачиSerializer, 
+    РасходыSerializer
 )
 
 class РаботникViewSet(viewsets.ModelViewSet):
@@ -59,3 +60,8 @@ class МойПрофильAPIView(APIView):
             return Response(serializer.data)
         except Работник.DoesNotExist:
             return Response({'error': 'Работник не найден'}, status=404)
+
+
+class РасходыViewSet(viewsets.ModelViewSet):
+    queryset = Расходы.objects.all()
+    serializer_class = РасходыSerializer

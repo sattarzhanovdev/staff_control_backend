@@ -90,3 +90,19 @@ class Задача(models.Model):
 
     def __str__(self):
         return self.название
+
+
+class Расходы(models.Model):
+    КАТЕГОРИЯ = [
+        ('закуп', 'Закуп'),
+        ('оплата за смену', 'Оплата за смену')
+    ]
+
+    название = models.CharField(max_length=255)
+    дата = models.DateTimeField()
+    время = models.TimeField()
+    категория = models.CharField(max_length=10, choices=КАТЕГОРИЯ, default='средний')
+    сумма = models.IntegerField()
+
+    def __str__(self):
+        return self.название

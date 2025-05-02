@@ -1,6 +1,6 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
-from .models import Работник, Посещаемость, Бонус, Задача
+from .models import Работник, Посещаемость, Бонус, Задача, Расходы
 
 class UserShortSerializer(serializers.ModelSerializer):
     class Meta:
@@ -68,3 +68,9 @@ class ОбновлениеЗадачиSerializer(serializers.ModelSerializer):
     class Meta:
         model = Задача
         fields = ['статус', 'потраченное_время_в_минутах', 'опоздание_по_задаче_в_минутах', 'срок']
+
+
+class РасходыSerializer(serializers.ModelSerializer):
+    class Meta:
+        model = Расходы
+        fields = '__all__'
