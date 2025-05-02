@@ -35,6 +35,10 @@ class ЗадачаViewSet(viewsets.ModelViewSet):
         if self.action in ['partial_update', 'update']:
             return ОбновлениеЗадачиSerializer
         return ЗадачаSerializer
+    
+class РасходыViewSet(viewsets.ModelViewSet):
+    queryset = Расходы.objects.all()
+    serializer_class = РасходыSerializer
       
 class РегистрацияРаботникаAPIView(APIView):
     permission_classes = [IsAuthenticated]
@@ -61,7 +65,3 @@ class МойПрофильAPIView(APIView):
         except Работник.DoesNotExist:
             return Response({'error': 'Работник не найден'}, status=404)
 
-
-class РасходыViewSet(viewsets.ModelViewSet):
-    queryset = Расходы.objects.all()
-    serializer_class = РасходыSerializer

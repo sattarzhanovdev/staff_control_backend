@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from staff.views import (
     РаботникViewSet, ПосещаемостьViewSet, БонусViewSet,
-    ЗадачаViewSet, РегистрацияРаботникаAPIView, МойПрофильAPIView
+    ЗадачаViewSet, РегистрацияРаботникаAPIView, МойПрофильAPIView, РасходыViewSet
 )
 
 router = DefaultRouter()
@@ -14,6 +14,7 @@ router.register(r'работники', РаботникViewSet)
 router.register(r'посещения', ПосещаемостьViewSet)
 router.register(r'бонусы', БонусViewSet)
 router.register(r'задачи', ЗадачаViewSet)
+router.register(r'расходы', РасходыViewSet)
 
 urlpatterns = [
     path('admin/', admin.site.urls),

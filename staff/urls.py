@@ -1,7 +1,7 @@
 from django.contrib import admin
 from django.urls import path, include
 from rest_framework.routers import DefaultRouter
-from staff.views import РаботникViewSet, ПосещаемостьViewSet, БонусViewSet, ЗадачаViewSet, РасходыSerializer
+from staff.views import РаботникViewSet, ПосещаемостьViewSet, БонусViewSet, ЗадачаViewSet, РасходыViewSet
 
 router = DefaultRouter()
 router.register(r'работники', РаботникViewSet)

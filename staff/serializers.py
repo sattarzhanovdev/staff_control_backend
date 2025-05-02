@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.contrib.auth.models import User
 from .models import Работник, Посещаемость, Бонус, Задача, Расходы
+from rest_framework import generics
 
 class UserShortSerializer(serializers.ModelSerializer):
     class Meta:
@@ -74,3 +75,8 @@ class РасходыSerializer(serializers.ModelSerializer):
     class Meta:
         model = Расходы
         fields = '__all__'
+
+
+class РасходыCreateAPIView(generics.CreateAPIView):
+    queryset = Расходы.objects.all()
+    serializer_class = РасходыSerializer
