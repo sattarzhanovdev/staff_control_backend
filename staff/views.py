@@ -5,6 +5,8 @@ from rest_framework.permissions import IsAuthenticated
 from rest_framework import status
 from django.utils import timezone
 from datetime import timedelta
+from django.db.models import Sum
+from rest_framework.decorators import action
 
 from .models import Работник, Посещаемость, Бонус, Задача, Расходы
 from .serializers import (
@@ -41,17 +43,16 @@ class ЗадачаViewSet(viewsets.ModelViewSet):
 class РасходыViewSet(viewsets.ModelViewSet):
     queryset = Расходы.objects.all()
     serializer_class = РасходыSerializer
-    
-    
-class РасходыСводкаView(APIView):
-    def get(self, request):
+
+    @action(detail=False, methods=['get'], url_path='сводка')
+    def сводка(self, request):
         today = timezone.now().date()
         start_week = today - timedelta(days=today.weekday())
         start_month = today.replace(day=1)
 
-        за_день = Расход.objects.filter(дата=today).aggregate(Sum('сумма'))['сумма__sum'] or 0
-        за_неделю = Расход.objects.filter(дата__gte=start_week).aggregate(Sum('сумма'))['сумма__sum'] or 0
-        за_месяц = Расход.objects.filter(дата__gte=start_month).aggregate(Sum('сумма'))['сумма__sum'] or 0
+        за_день = self.queryset.filter(дата=today).aggregate(Sum('сумма'))['сумма__sum'] or 0
+        за_неделю = self.queryset.filter(дата__gte=start_week).aggregate(Sum('сумма'))['сумма__sum'] or 0
+        за_месяц = self.queryset.filter(дата__gte=start_month).aggregate(Sum('сумма'))['сумма__sum'] or 0
 
         return Response({
             'за_день': за_день,

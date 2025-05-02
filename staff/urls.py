@@ -12,5 +12,5 @@ router.register(r'расходы', РасходыViewSet)
 
 urlpatterns = [
   path('admin/', admin.site.urls),
-  path('api/', include(router.urls)),  # <-- всё ок теперь
+  path('api/', include(router.urls)),  # <-- всё ок теперь, 
 ]
