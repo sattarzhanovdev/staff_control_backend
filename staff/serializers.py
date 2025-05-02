@@ -67,4 +67,4 @@ class ЗадачаSerializer(serializers.ModelSerializer):
 class ОбновлениеЗадачиSerializer(serializers.ModelSerializer):
     class Meta:
         model = Задача
-        fields = ['статус', 'потраченное_время_в_минутах', 'опоздание_по_задаче_в_минутах']
+        fields = ['статус', 'потраченное_время_в_минутах', 'опоздание_по_задаче_в_минутах', 'срок']
