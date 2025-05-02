@@ -39,7 +39,24 @@ class ЗадачаViewSet(viewsets.ModelViewSet):
 class РасходыViewSet(viewsets.ModelViewSet):
     queryset = Расходы.objects.all()
     serializer_class = РасходыSerializer
-      
+    
+    
+class РасходыСводкаView(APIView):
+    def get(self, request):
+        today = timezone.now().date()
+        start_week = today - timedelta(days=today.weekday())
+        start_month = today.replace(day=1)
+
+        за_день = Расход.objects.filter(дата=today).aggregate(Sum('сумма'))['сумма__sum'] or 0
+        за_неделю = Расход.objects.filter(дата__gte=start_week).aggregate(Sum('сумма'))['сумма__sum'] or 0
+        за_месяц = Расход.objects.filter(дата__gte=start_month).aggregate(Sum('сумма'))['сумма__sum'] or 0
+
+        return Response({
+            'за_день': за_день,
+            'за_неделю': за_неделю,
+            'за_месяц': за_месяц,
+        })
+    
 class РегистрацияРаботникаAPIView(APIView):
     permission_classes = [IsAuthenticated]
 

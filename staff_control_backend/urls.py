@@ -6,7 +6,7 @@ from rest_framework.routers import DefaultRouter
 from rest_framework.authtoken.views import obtain_auth_token
 from staff.views import (
     РаботникViewSet, ПосещаемостьViewSet, БонусViewSet,
-    ЗадачаViewSet, РегистрацияРаботникаAPIView, МойПрофильAPIView, РасходыViewSet
+    ЗадачаViewSet, РегистрацияРаботникаAPIView, МойПрофильAPIView, РасходыViewSet, РасходыСводкаView
 )
 
 router = DefaultRouter()
@@ -22,5 +22,6 @@ urlpatterns = [
     path('api/register/', РегистрацияРаботникаAPIView.as_view()),
     path('api/', include(router.urls)),
     path('api/me/', МойПрофильAPIView.as_view()),
+    path('api/расходы/сводка/', РасходыСводкаView.as_view()),
 
 ]+ static(settings.STATIC_URL, document_root=settings.STATIC_ROOT)
