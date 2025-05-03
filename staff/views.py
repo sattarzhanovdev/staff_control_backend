@@ -40,6 +40,7 @@ class ЗадачаViewSet(viewsets.ModelViewSet):
             return ОбновлениеЗадачиSerializer
         return ЗадачаSerializer
     
+
 class РасходыViewSet(viewsets.ModelViewSet):
     queryset = Расходы.objects.all()
     serializer_class = РасходыSerializer

@@ -30,9 +30,11 @@ class РегистрацияРаботникаSerializer(serializers.ModelSerial
         model = Работник
         fields = [
             'username', 'password', 'email',
-            'имя', 'фамилия', 'год_рождения', 'график_работы', 'телефон',
-            'жизни', 'бонусы', 'выполненные_задачи', 'просроченные_задачи',
-            'отработанные_часы', 'зарплата', 'премия', "должность", 'тип_получения_зарплаты', 'смена', 'рабочие_дни'
+            'имя', 'фамилия', 'должность', 'год_рождения',
+            'график_работы', 'телефон', 'смена', 'рабочие_дни',
+            'жизни', 'бонусы', 'тип_получения_зарплаты',
+            'выполненные_задачи', 'просроченные_задачи',
+            'отработанные_часы', 'зарплата', 'премия'
         ]
 
     def create(self, validated_data):
@@ -42,8 +44,8 @@ class РегистрацияРаботникаSerializer(serializers.ModelSerial
 
         user = User.objects.create_user(
             username=username,
-            email=email,
-            password=password
+            password=password,
+            email=email
         )
 
         работник = Работник.objects.create(пользователь=user, **validated_data)
