@@ -101,6 +101,7 @@ class Расходы(models.Model):
     название = models.CharField(max_length=255)
     дата = models.DateField()
     категория = models.CharField(max_length=20, choices=КАТЕГОРИЯ, default='закуп')
+    исполнитель = models.CharField(max_length=255)
     сумма = models.IntegerField()
 
     def __str__(self):
